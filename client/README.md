@@ -9,6 +9,8 @@
 
 **Essential Variables**
 
+VITE_FIREBASE_KEY= `from firebase`
+
 VITE_AUTH_DOMAIN= `from firebase`
 
 VITE_PROJECT_ID=`from firebase`
