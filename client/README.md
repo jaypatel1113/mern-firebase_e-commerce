@@ -27,6 +27,7 @@ VITE_STRIPE_KEY=`Stripe Publishable Key`
 
 _fill each filed with your info respectively_
 
+
 ## Author
 
 **LinkedIn** Click [Here](https://in.linkedin.com/in/jaypatel1122) **@Jay Patel**
