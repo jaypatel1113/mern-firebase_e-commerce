@@ -10,7 +10,7 @@ import {
   useUpdateProductMutation,
 } from "../../../redux/api/productAPI";
 import { RootState, server } from "../../../redux/store";
-import { responseToast } from "../../../utils/features";
+import { getDollarPrice, numberWithCommas, responseToast } from "../../../utils/features";
 
 const Productmanagement = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -112,7 +112,7 @@ const Productmanagement = () => {
               ) : (
                 <span className="red"> Not Available</span>
               )}
-              <h3>${price}</h3>
+              <h3>₹{numberWithCommas(price)} ~ ${getDollarPrice(price)}</h3>
             </section>
             <article>
               <button className="product-delete-btn" onClick={deleteHandler}>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "../components/product-card";
 import {
   useCategoriesQuery,
@@ -23,7 +23,7 @@ const Search = () => {
 
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
-  const [maxPrice, setMaxPrice] = useState(100000);
+  const [maxPrice, setMaxPrice] = useState(200000);
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
 
@@ -49,7 +49,7 @@ const Search = () => {
   };
 
   const isPrevPage = page > 1;
-  const isNextPage = page < 4;
+  const isNextPage = searchedData && page < searchedData?.totalPage;
 
   if (isError) {
     const err = error as CustomError;
@@ -59,6 +59,11 @@ const Search = () => {
     const err = productError as CustomError;
     toast.error(err.data.message);
   }
+
+  useEffect(() => {
+    setPage(1)
+  }, [category, sort, search]);
+  
   return (
     <div className="product-search-page">
       <aside>
@@ -77,7 +82,7 @@ const Search = () => {
           <input
             type="range"
             min={conversion_rate}
-            max={100000}
+            max={200000}
             value={maxPrice}
             onChange={(e) => setMaxPrice(Number(e.target.value))}
           />
@@ -127,7 +132,7 @@ const Search = () => {
         )}
 
         {searchedData && searchedData.totalPage > 1 && (
-          <article>
+          <article style={{margin : "20px 0"}}>
             <button
               disabled={!isPrevPage}
               onClick={() => setPage((prev) => prev - 1)}

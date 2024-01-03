@@ -197,6 +197,7 @@ export const getAllProducts = TryCatch(
 
     const productsPromise = Product.find(baseQuery)
       .sort(sort && { price: sort === "asc" ? 1 : -1 })
+      .sort({ createdAt: -1 })
       .limit(limit)
       .skip(skip);
 

@@ -16,6 +16,10 @@
     @include heading(1px);
     margin-top: 3rem;
     @include flex(row, space-between, center);
+    
+    >a {
+        font-weight: 600;
+    }
   }
 
   .findmore {
@@ -37,7 +41,7 @@
 
 .product-card {
   width: 18.75rem;
-  height: 25rem;
+  height: auto;
   padding: 1rem;
   flex: none;
   @include flex(column, flex-start, center, 4px);
