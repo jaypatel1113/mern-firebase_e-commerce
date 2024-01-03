@@ -61,6 +61,23 @@ export const BarChart = ({
       title: {
         display: false,
       },
+      tooltip: {
+        mode: "index",
+        intersect: false,
+        titleFont: {
+            weight: "bold",
+        },
+        bodyFont: {
+            weight: "normal",
+        },
+        callbacks: {
+            label: (context) => {
+                const label = context.dataset.label || '';
+                const value = context.formattedValue;
+                return `  ${label}: ${value}`;
+            },
+        },
+    },
     },
 
     scales: {
@@ -142,6 +159,14 @@ export const DoughnutChart = ({
           padding: 40,
         },
       },
+      tooltip: {
+        callbacks: {
+            label: (context) => {
+                const value = context.formattedValue;
+                return `  ${value}`;
+            },
+        },
+    },
     },
     cutout,
   };
@@ -179,6 +204,15 @@ export const PieChart = ({
       legend: {
         display: false,
       },
+      tooltip: {
+        callbacks: {
+            label: (context) => {
+                // const label = context.label || '';
+                const value = context.formattedValue;
+                return `  ${value}`;
+            },
+        },
+    },
     },
   };
 
@@ -209,6 +243,15 @@ export const LineChart = ({
       title: {
         display: false,
       },
+      tooltip: {
+        callbacks: {
+            label: (context) => {
+                const label = context.dataset.label || '';
+                const value = context.formattedValue;
+                return `  ${label}: ${value}`;
+            },
+        },
+    },
     },
 
     scales: {
