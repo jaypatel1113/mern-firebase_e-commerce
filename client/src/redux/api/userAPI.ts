@@ -4,6 +4,7 @@ import {
   AllUsersResponse,
   DeleteUserRequest,
   MessageResponse,
+  UpdateUserRequest,
   UserResponse,
 } from "../../types/api-types";
 import { User } from "../../types/types";
@@ -32,6 +33,14 @@ export const userAPI = createApi({
       invalidatesTags: ["users"],
     }),
 
+    updateUser: builder.mutation<MessageResponse, UpdateUserRequest>({
+      query: ({ userId, adminUserId }) => ({
+        url: `${userId}?id=${adminUserId}`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["users"],
+    }),
+
     allUsers: builder.query<AllUsersResponse, string>({
       query: (id) => `all?id=${id}`,
       providesTags: ["users"],
@@ -51,5 +60,5 @@ export const getUser = async (id: string) => {
   }
 };
 
-export const { useLoginMutation, useAllUsersQuery, useDeleteUserMutation } =
+export const { useLoginMutation, useAllUsersQuery, useDeleteUserMutation, useUpdateUserMutation } =
   userAPI;

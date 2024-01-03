@@ -4,6 +4,7 @@ import {
   getAllUsers,
   getUser,
   newUser,
+  updateRole,
 } from "../controllers/user.js";
 import { adminOnly } from "../middlewares/auth.js";
 
@@ -16,6 +17,6 @@ app.post("/new", newUser);
 app.get("/all", adminOnly, getAllUsers);
 
 // Route - /api/v1/user/dynamicID
-app.route("/:id").get(getUser).delete(adminOnly, deleteUser);
+app.route("/:id").get(getUser).delete(adminOnly, deleteUser).put(adminOnly, updateRole);
 
 export default app;

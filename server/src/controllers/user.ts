@@ -73,3 +73,20 @@ export const deleteUser = TryCatch(async (req, res, next) => {
     message: "User Deleted Successfully",
   });
 });
+
+export const updateRole = TryCatch(async (req, res, next) => {
+    const id = req.params.id;
+    const user = await User.findById(id);
+  
+    if (!user) return next(new ErrorHandler("Invalid Id", 400));
+
+    user.role = user.role === "admin" ? "user" : "admin";
+
+    await user.save();
+  
+    return res.status(200).json({
+      success: true,
+      message: "User role Updated Successfully",
+    });
+  });
+  

@@ -120,3 +120,8 @@ export type DeleteUserRequest = {
   userId: string;
   adminUserId: string;
 };
+
+export type UpdateUserRequest = {
+  userId: string;
+  adminUserId: string;
+};

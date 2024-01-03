@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Column } from "react-table";
 import AdminSidebar from "../../components/admin/AdminSidebar";
@@ -9,6 +9,7 @@ import { Skeleton } from "../../components/loader";
 import {
   useAllUsersQuery,
   useDeleteUserMutation,
+  useUpdateUserMutation,
 } from "../../redux/api/userAPI";
 import { RootState } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
@@ -58,9 +59,14 @@ const Customers = () => {
   const [rows, setRows] = useState<DataType[]>([]);
 
   const [deleteUser] = useDeleteUserMutation();
+  const [updateUser] = useUpdateUserMutation();
 
   const deleteHandler = async (userId: string) => {
     const res = await deleteUser({ userId, adminUserId: user?._id! });
+    responseToast(res, null, "");
+  };
+  const updateHandler = async (userId: string) => {
+    const res = await updateUser({ userId, adminUserId: user?._id! });
     responseToast(res, null, "");
   };
 
@@ -87,9 +93,14 @@ const Customers = () => {
           gender: i.gender,
           role: i.role,
           action: (
-            <button onClick={() => deleteHandler(i._id)}>
-              <FaTrash />
-            </button>
+            <>
+                <button style={{color: "green", fontSize: 20, marginRight: "0.2rem"}} onClick={() => updateHandler(i._id)}>
+                    <FaEdit />
+                </button>
+                <button onClick={() => deleteHandler(i._id)}>
+                    <FaTrash />
+                </button>
+            </>
           ),
         }))
       );
