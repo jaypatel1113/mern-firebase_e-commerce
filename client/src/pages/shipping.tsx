@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { saveShippingInfo } from "../redux/reducer/cartReducer";
 import { RootState, server } from "../redux/store";
+import { getDollarPrice } from "../utils/features";
 
 const Shipping = () => {
     const { cartItems, total } = useSelector((state: RootState) => state.cartReducer);
@@ -33,7 +34,7 @@ const Shipping = () => {
             const { data } = await axios.post(
                 `${server}/api/v1/payment/create`,
                 {
-                    amount: total,
+                    amount: getDollarPrice(total),
                     name: user?.name,
                     shippingInfo: shippingInfo,
                 },

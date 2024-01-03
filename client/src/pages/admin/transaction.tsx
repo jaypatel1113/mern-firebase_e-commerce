@@ -9,10 +9,11 @@ import { Skeleton } from "../../components/loader";
 import { useAllOrdersQuery } from "../../redux/api/orderAPI";
 import { RootState } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
+import { getDollarPrice } from "../../utils/features";
 
 interface DataType {
   user: string;
-  amount: number;
+  amount: string;
   discount: number;
   quantity: number;
   status: ReactElement;
@@ -21,7 +22,7 @@ interface DataType {
 
 const columns: Column<DataType>[] = [
   {
-    Header: "Avatar",
+    Header: "Name",
     accessor: "user",
   },
   {
@@ -63,7 +64,7 @@ const Transaction = () => {
       setRows(
         data.orders.map((i) => ({
           user: i.user.name,
-          amount: i.total,
+          amount: `₹${i.total} ~ $${getDollarPrice(i.total)}`,
           discount: i.discount,
           quantity: i.orderItems.length,
           status: (

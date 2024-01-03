@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import { server } from "../redux/store";
 import { CartItem } from "../types/types";
+import { getDollarPrice } from "../utils/features";
 
 type CartItemProps = {
   cartItem: CartItem;
@@ -23,7 +24,7 @@ const CartItem = ({
       <img src={`${server}/${photo}`} alt={name} />
       <article>
         <Link to={`/product/${productId}`}>{name}</Link>
-        <span>₹{price}</span>
+        <span>${getDollarPrice(price)}</span>
       </article>
 
       <div>

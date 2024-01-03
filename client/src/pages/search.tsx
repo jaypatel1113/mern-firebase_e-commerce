@@ -10,6 +10,8 @@ import { Skeleton } from "../components/loader";
 import { CartItem } from "../types/types";
 import { addToCart } from "../redux/reducer/cartReducer";
 import { useDispatch } from "react-redux";
+import { getDollarPrice } from "../utils/features";
+import { conversion_rate } from "../redux/store";
 
 const Search = () => {
   const {
@@ -71,10 +73,10 @@ const Search = () => {
         </div>
 
         <div>
-          <h4>Max Price: {maxPrice || ""}</h4>
+          <h4>Max Price: ${getDollarPrice(maxPrice) || ""}</h4>
           <input
             type="range"
-            min={100}
+            min={conversion_rate}
             max={100000}
             value={maxPrice}
             onChange={(e) => setMaxPrice(Number(e.target.value))}

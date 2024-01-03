@@ -10,7 +10,7 @@ import {
 } from "../../../redux/api/orderAPI";
 import { RootState, server } from "../../../redux/store";
 import { Order, OrderItem } from "../../../types/types";
-import { responseToast } from "../../../utils/features";
+import { getDollarPrice, responseToast } from "../../../utils/features";
 
 const defaultData: Order = {
   shippingInfo: {
@@ -112,11 +112,11 @@ const TransactionManagement = () => {
                 {`${address}, ${city}, ${state}, ${country} ${pinCode}`}
               </p>
               <h5>Amount Info</h5>
-              <p>Subtotal: {subtotal}</p>
-              <p>Shipping Charges: {shippingCharges}</p>
-              <p>Tax: {tax}</p>
-              <p>Discount: {discount}</p>
-              <p>Total: {total}</p>
+              <p>Subtotal: ₹ {subtotal} ~ $ {getDollarPrice(subtotal)}</p>
+              <p>Shipping Charges: ₹ {shippingCharges} ~ $ {getDollarPrice(shippingCharges)}</p>
+              <p>Tax: ₹ {tax} ~ $ {getDollarPrice(tax)}</p>
+              <p>Discount: ₹ {discount} ~ $ {getDollarPrice(discount)}</p>
+              <p>Total: ₹ {total} ~ $ {getDollarPrice(total)}</p>
 
               <h5>Status Info</h5>
               <p>
@@ -155,7 +155,7 @@ const ProductCard = ({
     <img src={photo} alt={name} />
     <Link to={`/product/${productId}`}>{name}</Link>
     <span>
-      ₹{price} X {quantity} = ₹{price * quantity}
+        ₹{price} X {quantity} = ₹{price * quantity}
     </span>
   </div>
 );

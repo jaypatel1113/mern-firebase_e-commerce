@@ -8,10 +8,11 @@ import { Skeleton } from "../components/loader";
 import { useMyOrdersQuery } from "../redux/api/orderAPI";
 import { RootState } from "../redux/store";
 import { CustomError } from "../types/api-types";
+import { getDollarPrice } from "../utils/features";
 
 type DataType = {
   _id: string;
-  amount: number;
+  amount: string;
   quantity: number;
   discount: number;
   status: ReactElement;
@@ -62,7 +63,7 @@ const Orders = () => {
       setRows(
         data.orders.map((i) => ({
           _id: i._id,
-          amount: i.total,
+          amount: `$ ${getDollarPrice(i.total)}`,
           discount: i.discount,
           quantity: i.orderItems.length,
           status: (

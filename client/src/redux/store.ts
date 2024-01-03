@@ -7,6 +7,7 @@ import { orderApi } from "./api/orderAPI";
 import { dashboardApi } from "./api/dashboardAPI";
 
 export const server = import.meta.env.VITE_SERVER;
+export const conversion_rate = import.meta.env.VITE_CONVERTION_RATE;
 
 export const store = configureStore({
   reducer: {

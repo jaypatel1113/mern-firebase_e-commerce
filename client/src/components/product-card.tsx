@@ -1,6 +1,7 @@
 import { FaPlus } from "react-icons/fa";
 import { server } from "../redux/store";
 import { CartItem } from "../types/types";
+import { getDollarPrice } from "../utils/features";
 
 type ProductsProps = {
   productId: string;
@@ -23,7 +24,7 @@ const ProductCard = ({
     <div className="product-card">
       <img src={`${server}/${photo}`} alt={name} />
       <p>{name}</p>
-      <span>₹{price}</span>
+      <span>${getDollarPrice(price)}</span>
 
       <div>
         <button
