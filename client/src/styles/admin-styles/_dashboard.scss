@@ -89,7 +89,7 @@
     .dashboard-categories {
       width: 100%;
       max-width: 16rem;
-      @include flex(column, center, unset, 0);
+      @include flex(column, flex-start, unset, 0);
       padding-bottom: 2rem;
       > h2 {
         @include heading;
@@ -99,7 +99,6 @@
 
       > div {
         overflow-y: auto;
-        height: 40rem;
         padding-left: 0.5rem;
         &::-webkit-scrollbar {
           display: none;

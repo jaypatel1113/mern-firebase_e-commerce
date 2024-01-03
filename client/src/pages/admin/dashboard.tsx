@@ -95,7 +95,7 @@ const Dashboard = () => {
                         key={heading}
                         value={value}
                         heading={heading}
-                        color={`hsl(${value * 4}, ${value}%, 50%)`}
+                        color={`hsl(${value * 10 * Math.random()}, ${value}%, 50%)`}
                       />
                     );
                   })}

@@ -57,7 +57,7 @@ const Header = ({ user }: PropsType) => {
               <Link onClick={() => setIsOpen(false)} to="/orders">
                 Orders
               </Link>
-              <button onClick={logoutHandler}>
+              <button onClick={logoutHandler} style={{marginTop: "0.5rem", alignSelf: "flex-end"}}>
                 <FaSignOutAlt />
               </button>
             </div>

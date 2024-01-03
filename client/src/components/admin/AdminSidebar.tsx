@@ -59,7 +59,9 @@ const AdminSidebar = () => {
             : {}
         }
       >
-        <h2>Logo.</h2>
+        <Link style={{marginRight: "auto", fontFamily: "cursive", fontSize: 24, fontWeight: "900", letterSpacing: "0.1px"}} to={"/"}>
+            Shop it now 
+        </Link>
         <DivOne location={location} />
         <DivTwo location={location} />
         <DivThree location={location} />

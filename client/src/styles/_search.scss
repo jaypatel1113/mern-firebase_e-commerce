@@ -1,7 +1,7 @@
 .product-search-page {
-  padding: 2rem;
+  padding: 4rem 2rem;
   @include flex(row, flex-start, stretch, 2rem);
-  min-height: calc(100vh - 6.5vh);
+  min-height: 100vh;
 
   > aside {
     min-width: 20rem;
@@ -37,7 +37,9 @@
     > input {
       @include inputStyle(50%);
       border-radius: 5px;
-      margin: 1rem;
+      margin: 1rem 0;
+      width: 100%;
+      border: 1px solid rgba(212, 212, 212, 0.379);
       font-size: 1.2rem;
       display: block;
     }

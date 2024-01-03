@@ -80,8 +80,10 @@ export const getDashboardStats = TryCatch(async (req, res, next) => {
     });
 
     const latestTransactionsPromise = Order.find({})
-      .select(["orderItems", "discount", "total", "status"])
-      .limit(4);
+        .select(["orderItems", "discount", "total", "status"])
+        // .sort({ total: -1 })
+        .sort({ createdAt: -1 })
+        .limit(4);
 
     const [
       thisMonthProducts,

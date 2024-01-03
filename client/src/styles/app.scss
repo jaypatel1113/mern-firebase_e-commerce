@@ -8,6 +8,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 body {
@@ -45,6 +48,12 @@ $color3: rgb(0, 104, 136);
 @import "admin-styles/dashboardapp";
 @import "admin-styles/mediaquery";
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .container {
   max-width: 1367px;
   width: 100%;
@@ -65,6 +74,12 @@ $color3: rgb(0, 104, 136);
 
 .header {
   @include flex(row, flex-end, stretch, 1.2rem);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 20;
   padding: 1rem;
   a {
     color: $color2;
@@ -92,8 +107,8 @@ $color3: rgb(0, 104, 136);
     padding: 10px;
     width: 100px;
     position: absolute;
-    left: calc(100% - 100px);
-    top: 8%;
+    left: calc(100% - 120px);
+    top: 100%;
     > div {
       @include flex(column, flex-start, center, 0.25rem);
     }
@@ -111,6 +126,7 @@ $color3: rgb(0, 104, 136);
   max-width: 400px;
   width: 100%;
   margin: auto;
+  padding: 4rem 0 0 0;
   > form {
     @include flex(column, flex-start, stretch, 2rem);
 
@@ -124,13 +140,14 @@ $color3: rgb(0, 104, 136);
 
 .admin-container {
   @include grid(1fr 4fr, 2rem);
-  height: 100vh;
+  min-height: 100vh;
   background-color: rgb(247, 247, 247);
+  padding-top: 4rem;
   > aside {
     width: 100%;
     background-color: white;
     padding: 1rem;
-    z-index: 10;
+    z-index: 30;
     overflow-y: auto;
     &::-webkit-scrollbar {
       display: none;
@@ -162,6 +179,7 @@ $color3: rgb(0, 104, 136);
 .table {
   border-collapse: collapse;
   width: 100%;
+  overflow: auto;
   th,
   td {
     padding: 8px;
@@ -183,7 +201,8 @@ $color3: rgb(0, 104, 136);
     }
 
     td {
-      padding: 1rem;
+        padding: 1rem;
+        width: fit-content;
 
       img {
         width: 4rem;
@@ -255,7 +274,7 @@ $color3: rgb(0, 104, 136);
   font-size: 2rem;
   background-color: white;
   border-radius: 50%;
-  z-index: 9;
+  z-index: 25;
 }
 
 #close-sidebar {
