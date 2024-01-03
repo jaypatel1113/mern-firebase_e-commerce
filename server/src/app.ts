@@ -1,11 +1,12 @@
 import express from "express";
-import { connectDB } from "./utils/features.js";
-import { errorMiddleware } from "./middlewares/error.js";
 import NodeCache from "node-cache";
-import { config } from "dotenv";
 import morgan from "morgan";
 import Stripe from "stripe";
 import cors from "cors";
+import { config } from "dotenv";
+
+import { errorMiddleware } from "./middlewares/error.js";
+import { connectDB } from "./utils/features.js";
 
 // Importing Routes
 import userRoute from "./routes/user.js";
@@ -14,9 +15,7 @@ import orderRoute from "./routes/order.js";
 import paymentRoute from "./routes/payment.js";
 import dashboardRoute from "./routes/stats.js";
 
-config({
-  path: "./.env",
-});
+config({ path: "./.env" });
 
 const port = process.env.PORT || 4000;
 const mongoURI = process.env.MONGO_URI || "";
@@ -34,7 +33,7 @@ app.use(morgan("dev"));
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("API Working with /api/v1");
+    res.status(200).json("API Working with /api/v1");
 });
 
 // Using Routes
@@ -48,5 +47,5 @@ app.use("/uploads", express.static("uploads"));
 app.use(errorMiddleware);
 
 app.listen(port, () => {
-  console.log(`Express is working on http://localhost:${port}`);
+    console.log(`Express is working on http://localhost:${port}`);
 });
