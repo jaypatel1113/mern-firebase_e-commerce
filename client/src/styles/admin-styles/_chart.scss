@@ -1,7 +1,9 @@
 .chart-container {
   background-color: white;
-  padding: 4rem;
+  padding: 2rem 4rem;
   overflow-y: auto;
+  max-height: calc(100vh - 4rem);
+
   > h1 {
     margin: 0 0 5rem 2rem;
   }

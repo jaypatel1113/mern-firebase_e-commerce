@@ -44,7 +44,7 @@ const DashboardTable = ({ data = [] }: { data: DataType[] }) => {
               _id: i._id,
               quantity: i.quantity,
               discount: i.discount,
-              amount: `₹${i.amount} ~ $${getDollarPrice(+i.amount)}`,
+              amount: `₹${i.amount}~$${getDollarPrice(+i.amount)}`,
               status: (
                 <span
                   className={

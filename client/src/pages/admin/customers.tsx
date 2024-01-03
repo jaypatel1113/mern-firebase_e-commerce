@@ -94,7 +94,7 @@ const Customers = () => {
           role: i.role,
           action: (
             <>
-                <button style={{color: "green", fontSize: 20, marginRight: "0.2rem"}} onClick={() => updateHandler(i._id)}>
+                <button style={{color: "rgb(56, 207, 56)", fontSize: 20, marginRight: "0.2rem"}} onClick={() => updateHandler(i._id)}>
                     <FaEdit />
                 </button>
                 <button onClick={() => deleteHandler(i._id)}>

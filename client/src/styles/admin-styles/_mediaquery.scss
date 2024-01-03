@@ -22,6 +22,14 @@
   .product-management {
     padding: 2rem;
   }
+  
+  .widget-container-sub {
+    padding: 0 !important;
+    .widget {
+        padding: 2rem !important;
+        width: 100%;
+    }
+  }
 }
 
 @media screen and (width<= 1100px) {
@@ -119,4 +127,19 @@
       align-items: center;
     }
   }
+  .widget-container {
+      padding: 2rem !important;
+    .widget {
+        width: 100% !important;
+    }
+  }
+  .widget-container-sub {
+    padding: 0 !important;
+  }
+.transaction-container {
+    .gender-chart, 
+    .dashboard-categories {
+        max-width: none !important;
+    }
+}
 }

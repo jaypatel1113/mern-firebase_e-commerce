@@ -64,7 +64,7 @@ const Transaction = () => {
       setRows(
         data.orders.map((i) => ({
           user: i.user.name,
-          amount: `₹${i.total} ~ $${getDollarPrice(i.total)}`,
+          amount: `₹${i.total}~$${getDollarPrice(i.total)}`,
           discount: i.discount,
           quantity: i.orderItems.length,
           status: (

@@ -9,7 +9,7 @@ import { BarChart, DoughnutChart } from "../../components/admin/Charts";
 import Table from "../../components/admin/DashboardTable";
 import { Skeleton } from "../../components/loader";
 import { useStatsQuery } from "../../redux/api/dashboardAPI";
-import { RootState } from "../../redux/store";
+import { RootState, conversion_rate } from "../../redux/store";
 import { getLastMonths } from "../../utils/features";
 
 const userImg =
@@ -71,36 +71,30 @@ const Dashboard = () => {
             </section>
 
             <section className="graph-container">
-              <div className="revenue-chart">
-                <h2>Revenue & Transaction</h2>
-                <BarChart
-                  labels={months}
-                  data_1={stats.chart.revenue}
-                  data_2={stats.chart.order}
-                  title_1="Revenue"
-                  title_2="Transaction"
-                  bgColor_1="rgb(0, 115, 255)"
-                  bgColor_2="rgba(53, 162, 235, 0.8)"
-                />
-              </div>
-
-              <div className="dashboard-categories">
-                <h2>Inventory</h2>
-
-                <div>
-                  {stats.categoryCount.map((i) => {
-                    const [heading, value] = Object.entries(i)[0];
-                    return (
-                      <CategoryItem
-                        key={heading}
-                        value={value}
-                        heading={heading}
-                        color={`hsl(${value * 10 * Math.random()}, ${value}%, 50%)`}
-                      />
-                    );
-                  })}
+                <div className="revenue-chart">
+                    <h2>Revenue</h2>
+                    <BarChart
+                    labels={months}
+                    data_1={stats.chart.revenue}
+                    data_2={[]}
+                    title_1="Revenue"
+                    title_2=""
+                    bgColor_1="rgb(123, 239, 178)"
+                    bgColor_2=""
+                    />
                 </div>
-              </div>
+                <div className="revenue-chart">
+                    <h2>Orders</h2>
+                    <BarChart
+                    labels={months}
+                    data_1={stats.chart.order}
+                    data_2={[]}
+                    title_1="Transaction"
+                    title_2=""
+                    bgColor_1="rgb(255, 99, 132)"
+                    bgColor_2=""
+                    />
+                </div>
             </section>
 
             <section className="transaction-container">
@@ -120,7 +114,44 @@ const Dashboard = () => {
                 </p>
               </div>
 
+              <div className="dashboard-categories">
+                <h2>Inventory</h2>
 
+                <div>
+                  {stats.categoryCount.map((i) => {
+                    const [heading, value] = Object.entries(i)[0];
+                    return (
+                      <CategoryItem
+                        key={heading}
+                        value={value}
+                        heading={heading}
+                        color={`hsl(${value * 10 * Math.random()}, ${value}%, 50%)`}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="widget-container widget-container-sub">
+                <WidgetItem
+                    percent={-60}
+                    amount={true}
+                    value={3935}
+                    heading="Overall Tax"
+                    color="rgb(255, 0, 247)"
+                    />
+                <WidgetItem
+                    percent={18}
+                    amount={true}
+                    value={conversion_rate}
+                    color="rgb(255, 145, 0)"
+                    heading="Conversion Rate"
+                />
+              </div>
+
+
+            </section>
+            <section className="transaction-container">
               <Table data={stats.latestTransaction} />
             </section>
           </>

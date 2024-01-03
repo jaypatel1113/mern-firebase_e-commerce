@@ -1,5 +1,6 @@
 .dashboard {
   overflow-y: auto;
+  max-height: 90vh;
 
   .bar {
     height: 4rem;
@@ -78,6 +79,7 @@
     .revenue-chart {
       width: 100%;
       padding: 1rem 3rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.132);
 
       > h2 {
         @include heading;
@@ -86,53 +88,53 @@
       }
     }
 
-    .dashboard-categories {
+
+  }
+  .dashboard-categories {
+    width: 100%;
+    max-width: 18rem;
+    @include flex(column, flex-start, unset, 0);
+    padding-bottom: 2rem;
+    > h2 {
+      @include heading;
+      margin: 1.5rem 0 2rem 0;
+      text-align: center;
+    }
+
+    > div {
+      overflow-y: auto;
+      padding: 0 1rem;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .category-item {
       width: 100%;
-      max-width: 16rem;
-      @include flex(column, flex-start, unset, 0);
-      padding-bottom: 2rem;
-      > h2 {
-        @include heading;
-        margin: 1.5rem 0 2rem 0;
-        text-align: center;
+      @include flex(row, space-between);
+      padding: 0.5rem;
+      > h5 {
+        letter-spacing: 1px;
+        font-weight: 300;
       }
-
       > div {
-        overflow-y: auto;
-        padding-left: 0.5rem;
-        &::-webkit-scrollbar {
-          display: none;
+        margin-left: auto;
+        width: 6rem;
+        background-color: rgb(217, 217, 217);
+        border-radius: 20px;
+        height: 0.5rem;
+        flex: none;
+        > div {
+          border-radius: 20px;
+          height: 100%;
         }
       }
-
-      .category-item {
-        width: 100%;
-        @include flex(row, space-between);
-        padding: 1rem;
-        > h5 {
-          letter-spacing: 1px;
-          font-weight: 300;
-        }
-        > div {
-          margin-left: auto;
-          width: 6rem;
-          background-color: rgb(217, 217, 217);
-          border-radius: 20px;
-          height: 0.5rem;
-          flex: none;
-          > div {
-            border-radius: 20px;
-            height: 100%;
-          }
-        }
-        > span {
-          font-size: 0.8rem;
-          font-weight: 700;
-        }
+      > span {
+        font-size: 0.8rem;
+        font-weight: 700;
       }
     }
   }
-
   .transaction-container {
     display: flex;
     gap: 2rem;
@@ -141,9 +143,64 @@
 
     > div {
       background-color: white;
-      box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.132);
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.132);
       border-radius: 10px;
     }
+    .widget-container-sub {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        background-color: transparent;
+        padding: 0;
+        box-shadow: none;
+        
+        .widget {
+            width: 100%;
+            background-color: white;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.132);
+            padding: 0.5rem 2rem;
+            border-radius: 10px;
+            flex: 1;
+
+            @include flex(row, space-between, center, 0);
+    
+            .widget-info {
+                > p {
+                    opacity: 0.7;
+                    font-size: 1rem;
+                }
+                > h4 {
+                    font-size: 1.8rem;
+                    margin-top: 1.5rem;
+                }
+                > span {
+                    @include flex(row, unset, center, 0.5rem);
+                }
+            }
+    
+            .widget-circle {
+                position: relative;
+                @include square(8rem);
+                border-radius: 50%;
+                flex: none;
+                display: grid;
+                place-items: center;
+                background-color: aquamarine;
+                
+                &::before {
+                    content: "";
+                    position: absolute;
+                    @include square(6.2rem);
+                    background-color: white;
+                    border-radius: 100%;
+                }
+                span {
+                    position: relative;
+                }
+            }
+        }
+    }
+
     .gender-chart {
       width: 100%;
       max-width: 20rem;

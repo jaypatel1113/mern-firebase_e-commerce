@@ -269,10 +269,11 @@ $color3: rgb(0, 104, 136);
   cursor: pointer;
   color: rgba(44, 104, 255);
   position: fixed;
-  top: 1rem;
-  left: 1rem;
+  top: 0.5rem;
+  left: 0.5rem;
   font-size: 2rem;
   background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.232);
   border-radius: 50%;
   z-index: 25;
 }
