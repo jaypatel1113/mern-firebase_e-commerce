@@ -31,7 +31,7 @@ const Dashboard = () => {
       <AdminSidebar />
       <main className="dashboard">
         {isLoading ? (
-          <Skeleton length={20} />
+          <Skeleton length={15} />
         ) : (
           <>
             <div className="bar">

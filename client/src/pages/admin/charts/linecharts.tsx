@@ -32,7 +32,7 @@ const Linecharts = () => {
         <h1>Line Charts</h1>
 
         {isLoading ? (
-          <Skeleton length={15} />
+          <Skeleton length={13} />
         ) : (
           <>
             <section>

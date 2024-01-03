@@ -27,7 +27,7 @@ const PieCharts = () => {
         <h1>Pie & Doughnut Charts</h1>
 
         {isLoading ? (
-          <Skeleton length={20} />
+          <Skeleton length={13} />
         ) : (
           <>
             <section>

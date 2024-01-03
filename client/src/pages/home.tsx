@@ -33,7 +33,7 @@ const Home = () => {
 
       <main>
         {isLoading ? (
-          <Skeleton width="80vw" />
+          <Skeleton width="100vw" />
         ) : (
           data?.products.map((i) => (
             <ProductCard

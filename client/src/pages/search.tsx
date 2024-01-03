@@ -109,7 +109,7 @@ const Search = () => {
         />
 
         {productLoading ? (
-          <Skeleton length={10} />
+          <Skeleton length={15} />
         ) : (
           <div className="search-product-list">
             {searchedData?.products.map((i) => (

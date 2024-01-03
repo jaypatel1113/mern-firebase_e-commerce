@@ -76,8 +76,8 @@ const TransactionManagement = () => {
     <div className="admin-container">
       <AdminSidebar />
       <main className="product-management">
-        {isLoading ? (
-          <Skeleton />
+        {!isLoading ? (
+          <Skeleton length={15} />
         ) : (
           <>
             <section

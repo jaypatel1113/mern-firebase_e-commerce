@@ -100,7 +100,7 @@ const Productmanagement = () => {
       <AdminSidebar />
       <main className="product-management">
         {isLoading ? (
-          <Skeleton length={20} />
+          <Skeleton length={15} />
         ) : (
           <>
             <section>

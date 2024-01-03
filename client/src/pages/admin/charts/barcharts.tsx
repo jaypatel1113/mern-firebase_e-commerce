@@ -30,7 +30,7 @@ const Barcharts = () => {
       <main className="chart-container">
         <h1>Bar Charts</h1>
         {isLoading ? (
-          <Skeleton length={20} />
+          <Skeleton length={13} />
         ) : (
           <>
             <section>
