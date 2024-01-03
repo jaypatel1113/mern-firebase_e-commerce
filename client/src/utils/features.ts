@@ -55,7 +55,10 @@ export const getLastMonths = () => {
   };
 };
 
+export const numberWithCommas = (x: number) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 export const getDollarPrice = (inr: number) => {
-    return Math.round(inr/conversion_rate)
+    return numberWithCommas(Math.round(inr/conversion_rate));
 }

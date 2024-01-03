@@ -1,7 +1,7 @@
 import { Column } from "react-table";
 import TableHOC from "./TableHOC";
 import { ReactElement, useEffect, useState } from "react";
-import { getDollarPrice } from "../../utils/features";
+import { getDollarPrice, numberWithCommas } from "../../utils/features";
 
 interface DataType {
   _id: string;
@@ -44,7 +44,7 @@ const DashboardTable = ({ data = [] }: { data: DataType[] }) => {
               _id: i._id,
               quantity: i.quantity,
               discount: i.discount,
-              amount: `₹${i.amount}~$${getDollarPrice(+i.amount)}`,
+              amount: `₹${numberWithCommas(+i.amount)}~$${getDollarPrice(+i.amount)}`,
               status: (
                 <span
                   className={

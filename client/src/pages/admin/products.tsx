@@ -10,7 +10,7 @@ import { Skeleton } from "../../components/loader";
 import { useAllProductsQuery } from "../../redux/api/productAPI";
 import { RootState, server } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
-import { getDollarPrice } from "../../utils/features";
+import { getDollarPrice, numberWithCommas } from "../../utils/features";
 
 interface DataType {
   photo: ReactElement;
@@ -61,7 +61,7 @@ const Products = () => {
         data.products.map((i) => ({
           photo: <img src={`${server}/${i.photo}`} />,
           name: i.name,
-          price: `₹${i.price}~$${getDollarPrice(i.price)}`,
+          price: `₹${numberWithCommas(i.price)}~$${getDollarPrice(i.price)}`,
           stock: i.stock,
           action: <Link to={`/admin/product/${i._id}`}>Manage</Link>,
         }))

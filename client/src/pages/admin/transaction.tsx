@@ -9,7 +9,7 @@ import { Skeleton } from "../../components/loader";
 import { useAllOrdersQuery } from "../../redux/api/orderAPI";
 import { RootState } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
-import { getDollarPrice } from "../../utils/features";
+import { getDollarPrice, numberWithCommas } from "../../utils/features";
 
 interface DataType {
   user: string;
@@ -64,7 +64,7 @@ const Transaction = () => {
       setRows(
         data.orders.map((i) => ({
           user: i.user.name,
-          amount: `₹${i.total}~$${getDollarPrice(i.total)}`,
+          amount: `₹${numberWithCommas(i.total)}~$${getDollarPrice(i.total)}`,
           discount: i.discount,
           quantity: i.orderItems.length,
           status: (

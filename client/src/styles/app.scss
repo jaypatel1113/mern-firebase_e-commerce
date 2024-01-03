@@ -159,6 +159,7 @@ $color3: rgb(0, 104, 136);
         @include heading(2px);
         opacity: 0.8;
         margin: 1rem 0;
+        font-weight: 700;
       }
       > ul {
         @include flex(column, unset, unset, 0.5rem);

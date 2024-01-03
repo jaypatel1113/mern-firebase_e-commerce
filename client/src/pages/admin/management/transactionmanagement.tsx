@@ -10,7 +10,7 @@ import {
 } from "../../../redux/api/orderAPI";
 import { RootState, server } from "../../../redux/store";
 import { Order, OrderItem } from "../../../types/types";
-import { getDollarPrice, responseToast } from "../../../utils/features";
+import { getDollarPrice, numberWithCommas, responseToast } from "../../../utils/features";
 
 const defaultData: Order = {
   shippingInfo: {
@@ -76,7 +76,7 @@ const TransactionManagement = () => {
     <div className="admin-container">
       <AdminSidebar />
       <main className="product-management">
-        {!isLoading ? (
+        {isLoading ? (
           <Skeleton length={15} />
         ) : (
           <>
@@ -112,11 +112,11 @@ const TransactionManagement = () => {
                 {`${address}, ${city}, ${state}, ${country} ${pinCode}`}
               </p>
               <h5>Amount Info</h5>
-              <p>Subtotal: ₹ {subtotal} ~ $ {getDollarPrice(subtotal)}</p>
-              <p>Shipping Charges: ₹ {shippingCharges} ~ $ {getDollarPrice(shippingCharges)}</p>
-              <p>Tax: ₹ {tax} ~ $ {getDollarPrice(tax)}</p>
-              <p>Discount: ₹ {discount} ~ $ {getDollarPrice(discount)}</p>
-              <p>Total: ₹ {total} ~ $ {getDollarPrice(total)}</p>
+              <p>Subtotal: ₹ {numberWithCommas(subtotal)} ~ $ {getDollarPrice(subtotal)}</p>
+              <p>Shipping Charges: ₹ {numberWithCommas(shippingCharges)} ~ $ {getDollarPrice(shippingCharges)}</p>
+              <p>Tax: ₹ {numberWithCommas(tax)} ~ $ {getDollarPrice(tax)}</p>
+              <p>Discount: ₹ {numberWithCommas(discount)} ~ $ {getDollarPrice(discount)}</p>
+              <p>Total: ₹ {numberWithCommas(total)} ~ $ {getDollarPrice(total)}</p>
 
               <h5>Status Info</h5>
               <p>
@@ -155,7 +155,7 @@ const ProductCard = ({
     <img src={photo} alt={name} />
     <Link to={`/product/${productId}`}>{name}</Link>
     <span>
-        ₹{price} X {quantity} = ₹{price * quantity}
+        ₹{numberWithCommas(price)} X {quantity} = ₹{numberWithCommas(price * quantity)}
     </span>
   </div>
 );
