@@ -5,8 +5,8 @@ const Toss = () => {
     const [angle, setAngle] = useState<number>(0);
 
     const flipCoin = () => {
-        if (Math.random() > 0.5) setAngle((prev) => prev + 180);
-        else setAngle((prev) => prev + 360);
+        if (Math.random() > 0.5) setAngle((prev) => prev + 540);
+        else setAngle((prev) => prev + 720);
     };
 
     return (
