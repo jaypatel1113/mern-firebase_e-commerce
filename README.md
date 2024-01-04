@@ -26,4 +26,4 @@
 - ${\color{#EF476F}Custom \space Coupons \space (Discount)}$
 - ${\color{#FAC748}Payment \space Gateway}$
 - ${\color{#FAC748}Various \space animated \space Charts}$
-- ${\color{#FAC748}Numerous \space apps \space (Stopwatch, \space Code \space generator \space and \space Toss)}$
+- ${\color{#FAC748}Numerous \space apps \space (Stopwatch, \space Coupon \space generator \space and \space Toss)}$
