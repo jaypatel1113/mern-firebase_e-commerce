@@ -11,7 +11,7 @@
 - ${\color{#80ED99}Redux \space Toolkit}$
 - ${\color{#80ED99}Stripe}$
 - ${\color{#80ED99}Chart.js}$
-- ${\color{#80ED99}SASS}$
+- ${\color{#80ED99}SCSS}$
 - ${\color{#80ED99}react-table}$
 
 ## ${\color{#87CEEB}Functionality}$
