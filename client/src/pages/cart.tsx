@@ -2,17 +2,13 @@ import { useEffect, useState } from "react";
 import { VscError } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 import CartItemCard from "../components/cart-item";
-import {
-    addToCart,
-    calculatePrice,
-    discountApplied,
-    removeCartItem,
-} from "../redux/reducer/cartReducer";
+import { addToCart, calculatePrice, discountApplied, removeCartItem } from "../redux/reducer/cartReducer";
 import { RootState } from "../redux/store";
+import { useCouponValidityQuery } from "../redux/api/paymentAPI";
 import { CartItem } from "../types/types";
 import { getDollarPrice } from "../utils/features";
-import { useCouponValidityQuery } from "../redux/api/paymentAPI";
 import useDebounce from "../hooks/useDebounce";
 
 const Cart = () => {
@@ -44,15 +40,15 @@ const Cart = () => {
     useEffect(() => {
         if (isError && !isLoading) {
             dispatch(discountApplied(0));
-            setIsValidCouponCode(false);  // Set to false for invalid coupon
+            setIsValidCouponCode(false);
             dispatch(calculatePrice());
         } else if (!isError && data && !isLoading) {
             dispatch(discountApplied(data.discount));
-            setIsValidCouponCode(true);   // Set to true for valid coupon
+            setIsValidCouponCode(true);
             dispatch(calculatePrice());
         } else {
             dispatch(discountApplied(0));
-            setIsValidCouponCode(false);  // Set to false for any other case
+            setIsValidCouponCode(false);
             dispatch(calculatePrice());
         }
     }, [data, couponCode, isLoading, isError, error]);

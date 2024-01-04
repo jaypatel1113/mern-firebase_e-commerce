@@ -1,67 +1,66 @@
-import { MessageResponse } from "../types/api-types";
+import moment from "moment";
+import toast from "react-hot-toast";
+import { NavigateFunction } from "react-router-dom";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { SerializedError } from "@reduxjs/toolkit";
-import { NavigateFunction } from "react-router-dom";
-import toast from "react-hot-toast";
-import moment from "moment";
-import { conversion_rate } from "../redux/store";
 
-type ResType =
-  | {
-      data: MessageResponse;
-    }
-  | {
-      error: FetchBaseQueryError | SerializedError;
+import { conversion_rate } from "../redux/store";
+import { MessageResponse } from "../types/api-types";
+
+type ResType = | {
+        data: MessageResponse;
+    } | {
+        error: FetchBaseQueryError | SerializedError;
     };
 
-export const responseToast = (
-  res: ResType,
-  navigate: NavigateFunction | null,
-  url: string
-) => {
-  if ("data" in res) {
-    toast.success(res.data.message);
-    if (navigate) navigate(url);
-  } else {
-    const error = res.error as FetchBaseQueryError;
-    const messageResponse = error.data as MessageResponse;
-    toast.error(messageResponse.message);
-  }
+export const responseToast = (res: ResType, navigate: NavigateFunction | null, url: string) => {
+    if ("data" in res) {
+        toast.success(res.data.message);
+        if (navigate) navigate(url);
+    } else {
+        const error = res.error as FetchBaseQueryError;
+        const messageResponse = error.data as MessageResponse;
+        toast.error(messageResponse.message);
+    }
 };
 
 export const getLastMonths = () => {
-  const currentDate = moment();
+    const currentDate = moment();
 
-  currentDate.date(1);
+    currentDate.date(1);
 
-  const last6Months: string[] = [];
-  const last12Months: string[] = [];
+    const last6Months: string[] = [];
+    const last12Months: string[] = [];
 
-  for (let i = 0; i < 6; i++) {
-    const monthDate = currentDate.clone().subtract(i, "months");
-    const monthName = monthDate.format("MMMM");
-    last6Months.unshift(monthName);
-  }
+    for (let i = 0; i < 6; i++) {
+        const monthDate = currentDate.clone().subtract(i, "months");
+        const monthName = monthDate.format("MMMM");
+        last6Months.unshift(monthName);
+    }
 
-  for (let i = 0; i < 12; i++) {
-    const monthDate = currentDate.clone().subtract(i, "months");
-    const monthName = monthDate.format("MMMM");
-    last12Months.unshift(monthName);
-  }
+    for (let i = 0; i < 12; i++) {
+        const monthDate = currentDate.clone().subtract(i, "months");
+        const monthName = monthDate.format("MMMM");
+        last12Months.unshift(monthName);
+    }
 
-  return {
-    last12Months,
-    last6Months,
-  };
+    return {
+        last12Months,
+        last6Months,
+    };
 };
 
 export const numberWithCommas = (x: number) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+};
 
 export const getDollarPrice = (inr: number) => {
-    return numberWithCommas(Math.round(inr/conversion_rate));
-}
+    return numberWithCommas(Math.round(inr / conversion_rate));
+};
 export const getDPrice = (inr: number) => {
-    return Math.round(inr/conversion_rate);
+    return Math.round(inr / conversion_rate);
+};
+
+export const getClass = (s: string) => {
+    return s === "Processing" ? "red" : s === "Shipped" ? "green" : "purple"
 }

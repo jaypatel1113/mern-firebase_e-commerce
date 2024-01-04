@@ -1,12 +1,13 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { BiArrowBack } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
 import { saveShippingInfo } from "../redux/reducer/cartReducer";
+import { useCreateMutation } from "../redux/api/paymentAPI";
 import { RootState } from "../redux/store";
 import { getDPrice } from "../utils/features";
-import { useCreateMutation } from "../redux/api/paymentAPI";
 
 const Shipping = () => {
     const { cartItems, total } = useSelector((state: RootState) => state.cartReducer);
@@ -24,7 +25,11 @@ const Shipping = () => {
         pinCode: "",
     });
 
-    const changeHandler = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => setShippingInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const changeHandler = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+        setShippingInfo((prev) => ({
+            ...prev,
+            [e.target.name]: e.target.value,
+        }));
 
     const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -35,7 +40,7 @@ const Shipping = () => {
             amount: +getDPrice(total),
             name: user?.name!,
             shippingInfo: shippingInfo,
-        }
+        };
 
         const res = await createPayment(data);
         if ("data" in res) {

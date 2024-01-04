@@ -3,100 +3,95 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Column } from "react-table";
+
 import TableHOC from "../components/admin/TableHOC";
 import { Skeleton } from "../components/loader";
 import { useMyOrdersQuery } from "../redux/api/orderAPI";
 import { RootState } from "../redux/store";
 import { CustomError } from "../types/api-types";
-import { getDollarPrice } from "../utils/features";
+import { getClass, getDollarPrice } from "../utils/features";
 
 type DataType = {
-  _id: string;
-  amount: string;
-  quantity: number;
-  discount: string;
-  status: ReactElement;
-  action: ReactElement;
+    _id: string;
+    amount: string;
+    quantity: number;
+    discount: string;
+    status: ReactElement;
+    action: ReactElement;
 };
 
 const column: Column<DataType>[] = [
-  {
-    Header: "ID",
-    accessor: "_id",
-  },
-  {
-    Header: "Quantity",
-    accessor: "quantity",
-  },
-  {
-    Header: "Discount",
-    accessor: "discount",
-  },
-  {
-    Header: "Amount",
-    accessor: "amount",
-  },
-  {
-    Header: "Status",
-    accessor: "status",
-  },
-  {
-    Header: "Action",
-    accessor: "action",
-  },
+    {
+        Header: "ID",
+        accessor: "_id",
+    },
+    {
+        Header: "Quantity",
+        accessor: "quantity",
+    },
+    {
+        Header: "Discount",
+        accessor: "discount",
+    },
+    {
+        Header: "Amount",
+        accessor: "amount",
+    },
+    {
+        Header: "Status",
+        accessor: "status",
+    },
+    {
+        Header: "Action",
+        accessor: "action",
+    },
 ];
 
 const Orders = () => {
-  const { user } = useSelector((state: RootState) => state.userReducer);
+    const { user } = useSelector((state: RootState) => state.userReducer);
 
-  const { isLoading, data, isError, error } = useMyOrdersQuery(user?._id!);
+    const { isLoading, data, isError, error } = useMyOrdersQuery(user?._id!);
 
-  const [rows, setRows] = useState<DataType[]>([]);
+    const [rows, setRows] = useState<DataType[]>([]);
 
-  if (isError) {
-    const err = error as CustomError;
-    toast.error(err.data.message);
-  }
+    if (isError) {
+        const err = error as CustomError;
+        toast.error(err.data.message);
+    }
 
-  useEffect(() => {
-    if (data)
-      setRows(
-        data.orders.map((i) => ({
-          _id: i._id,
-          amount: `$ ${getDollarPrice(i.total)}`,
-          discount: `$ ${getDollarPrice(i.discount)}`,
-          quantity: i.orderItems.length,
-          status: (
-            <span
-              className={
-                i.status === "Processing"
-                  ? "red"
-                  : i.status === "Shipped"
-                  ? "green"
-                  : "purple"
-              }
-            >
-              {i.status}
-            </span>
-          ),
-          action: <Link to={`/admin/transaction/${i._id}`}>Manage</Link>,
-        }))
-      );
-  }, [data]);
+    useEffect(() => {
+        if (data)
+            setRows(
+                data.orders.map((i) => ({
+                    _id: i._id,
+                    amount: `$ ${getDollarPrice(i.total)}`,
+                    discount: `$ ${getDollarPrice(i.discount)}`,
+                    quantity: i.orderItems.length,
+                    status: (
+                        <span className={getClass(i.status)}>
+                            {i.status}
+                        </span>
+                    ),
+                    action: (
+                        <Link to={`/admin/transaction/${i._id}`}>Manage</Link>
+                    ),
+                }))
+            );
+    }, [data]);
 
-  const Table = TableHOC<DataType>(
-    column,
-    rows,
-    "dashboard-product-box",
-    "Orders",
-    rows.length > 6
-  )();
-  return (
-    <div className="container">
-      <h1>My Orders</h1>
-      {isLoading ? <Skeleton length={15} /> : Table}
-    </div>
-  );
+    const Table = TableHOC<DataType>(
+        column,
+        rows,
+        "dashboard-product-box",
+        "Orders",
+        rows.length > 6
+    )();
+    return (
+        <div className="container">
+            <h1>My Orders</h1>
+            {isLoading ? <Skeleton length={15} /> : Table}
+        </div>
+    );
 };
 
 export default Orders;

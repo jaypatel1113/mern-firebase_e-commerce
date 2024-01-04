@@ -10,7 +10,7 @@ export const connectDB = (uri: string) => {
         .catch((e) => console.log(e));
 };
 
-export const invalidateCache = ({ product, order, admin, userId, orderId, productId }: InvalidateCacheProps) => {
+export const invalidateCache = ({ product, order, admin, userId, orderId, productId, }: InvalidateCacheProps) => {
     if (product) {
         const productKeys: string[] = [
             "latest-products",

@@ -1,5 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AllCouponsResponse, CouponValidityResponse, CreatePaymentRequest, CreatePaymentResponse, DeleteCouponRequest, MessageResponse, NewCouponRequest } from "../../types/api-types";
+import {
+    AllCouponsResponse,
+    CouponValidityResponse,
+    CreatePaymentRequest,
+    CreatePaymentResponse,
+    DeleteCouponRequest,
+    MessageResponse,
+    NewCouponRequest,
+} from "../../types/api-types";
 
 export const couponApi = createApi({
     reducerPath: "couponApi",
@@ -17,7 +25,7 @@ export const couponApi = createApi({
             }),
         }),
         newCoupon: builder.mutation<MessageResponse, NewCouponRequest>({
-            query: ({formData, userId}) => ({
+            query: ({ formData, userId }) => ({
                 url: `coupon/new?id=${userId}`,
                 method: "POST",
                 body: formData,
@@ -25,7 +33,7 @@ export const couponApi = createApi({
             invalidatesTags: ["coupons"],
         }),
         deleteCoupon: builder.mutation<MessageResponse, DeleteCouponRequest>({
-            query: ({couponId, userId}) => ({
+            query: ({ couponId, userId }) => ({
                 url: `coupon/${couponId}?id=${userId}`,
                 method: "DELETE",
             }),
@@ -43,4 +51,10 @@ export const couponApi = createApi({
     }),
 });
 
-export const { useCreateMutation, useNewCouponMutation, useDeleteCouponMutation, useAllCouponsQuery, useCouponValidityQuery } = couponApi;
+export const {
+    useCreateMutation,
+    useNewCouponMutation,
+    useDeleteCouponMutation,
+    useAllCouponsQuery,
+    useCouponValidityQuery,
+} = couponApi;

@@ -100,7 +100,6 @@ export type CouponValidityResponse = {
     discount: number;
 };
 
-
 export type NewProductRequest = {
     id: string;
     formData: FormData;
