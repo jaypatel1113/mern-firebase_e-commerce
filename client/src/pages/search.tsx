@@ -12,6 +12,7 @@ import { addToCart } from "../redux/reducer/cartReducer";
 import { useDispatch } from "react-redux";
 import { getDollarPrice } from "../utils/features";
 import { conversion_rate } from "../redux/store";
+import useDebounce from "../hooks/useDebounce";
 
 const Search = () => {
   const {
@@ -26,6 +27,10 @@ const Search = () => {
   const [maxPrice, setMaxPrice] = useState(200000);
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
+  
+  const debouncedSearchValue = useDebounce(search, 500);
+  const debouncedPriceValue = useDebounce(maxPrice, 500);
+//   const throttledPrizeValue = useThrottle(maxPrice, 1000);
 
   const {
     isLoading: productLoading,
@@ -33,11 +38,11 @@ const Search = () => {
     isError: productIsError,
     error: productError,
   } = useSearchProductsQuery({
-    search,
+    search: debouncedSearchValue,
     sort,
     category,
     page,
-    price: maxPrice,
+    price: debouncedPriceValue,
   });
 
   const dispatch = useDispatch();
