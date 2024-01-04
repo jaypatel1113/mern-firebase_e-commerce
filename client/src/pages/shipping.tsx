@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { saveShippingInfo } from "../redux/reducer/cartReducer";
 import { RootState } from "../redux/store";
-import { getDollarPrice } from "../utils/features";
+import { getDPrice } from "../utils/features";
 import { useCreateMutation } from "../redux/api/paymentAPI";
 
 const Shipping = () => {
@@ -30,8 +30,9 @@ const Shipping = () => {
         e.preventDefault();
 
         dispatch(saveShippingInfo(shippingInfo));
+
         const data = {
-            amount: +getDollarPrice(total),
+            amount: +getDPrice(total),
             name: user?.name!,
             shippingInfo: shippingInfo,
         }

@@ -14,7 +14,7 @@ type DataType = {
   _id: string;
   amount: string;
   quantity: number;
-  discount: number;
+  discount: string;
   status: ReactElement;
   action: ReactElement;
 };
@@ -64,7 +64,7 @@ const Orders = () => {
         data.orders.map((i) => ({
           _id: i._id,
           amount: `$ ${getDollarPrice(i.total)}`,
-          discount: i.discount,
+          discount: `$ ${getDollarPrice(i.discount)}`,
           quantity: i.orderItems.length,
           status: (
             <span

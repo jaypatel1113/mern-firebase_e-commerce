@@ -61,6 +61,7 @@ const Login = () => {
       <main>
         <h1 className="heading">Login</h1>
 
+        <span className="red">note: while signing up make sure to fill all details. while signing in gender and dob is optional</span>
         <div>
           <label>Gender</label>
           <select value={gender} onChange={(e) => setGender(e.target.value)}>

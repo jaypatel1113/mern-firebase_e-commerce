@@ -133,9 +133,12 @@ const TransactionManagement = () => {
                   {status}
                 </span>
               </p>
-              <button className="shipping-btn" onClick={updateHandler}>
-                Process Status
-              </button>
+              {
+                status !== "Delivered" && 
+                    <button className="shipping-btn" onClick={updateHandler}>
+                        Process Status
+                    </button>
+              }
             </article>
           </>
         )}

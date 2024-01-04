@@ -62,3 +62,6 @@ export const numberWithCommas = (x: number) => {
 export const getDollarPrice = (inr: number) => {
     return numberWithCommas(Math.round(inr/conversion_rate));
 }
+export const getDPrice = (inr: number) => {
+    return Math.round(inr/conversion_rate);
+}

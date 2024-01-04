@@ -1,7 +1,7 @@
 .cart {
   padding: 4rem;
   @include flex(row, unset, unset, 4rem);
-  height: calc(100vh - 4rem);
+  height: 100vh;
 
   > main {
     width: 70%;
