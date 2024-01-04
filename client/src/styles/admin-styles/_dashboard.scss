@@ -92,7 +92,7 @@
   }
   .dashboard-categories {
     width: 100%;
-    max-width: 18rem;
+    max-width: 19rem;
     @include flex(column, flex-start, unset, 0);
     padding-bottom: 2rem;
     > h2 {
@@ -120,7 +120,7 @@
       > div {
         margin-left: auto;
         width: 6rem;
-        background-color: rgb(217, 217, 217);
+        background-color: rgb(245, 245, 245);
         border-radius: 20px;
         height: 0.5rem;
         flex: none;
@@ -132,6 +132,7 @@
       > span {
         font-size: 0.8rem;
         font-weight: 700;
+        min-width: 25px;
       }
     }
   }

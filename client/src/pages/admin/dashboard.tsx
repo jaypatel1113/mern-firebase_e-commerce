@@ -118,17 +118,37 @@ const Dashboard = () => {
                 <h2>Inventory</h2>
 
                 <div>
-                  {stats.categoryCount.map((i) => {
+                  {/* {stats.categoryCount.map((i) => {
                     const [heading, value] = Object.entries(i)[0];
                     return (
                       <CategoryItem
                         key={heading}
                         value={value}
                         heading={heading}
-                        color={`hsl(${value * 10 * Math.random()}, ${value}%, 50%)`}
+                        color={`hsl(${value * 13 * Math.random()}, ${value * 6}%, 50%)`}
                       />
                     );
-                  })}
+                  })} */}
+                  {
+                    stats.categoryCount
+                    .slice() // Create a shallow copy of the array to avoid modifying the original array
+                    .sort((a, b) => {
+                      const valueA = Object.values(a)[0];
+                      const valueB = Object.values(b)[0];
+                      return valueB - valueA; // Sort in descending order
+                    })
+                    .map((i) => {
+                      const [heading, value] = Object.entries(i)[0];
+                      return (
+                        <CategoryItem
+                          key={heading}
+                          value={value}
+                          heading={heading}
+                          color={`hsl(${Math.random() * 360}, 80%, 60%)`}
+                        />
+                      );
+                    })
+                  }
                 </div>
               </div>
 
@@ -196,7 +216,7 @@ const WidgetItem = ({
       style={{
         background: `conic-gradient(
         ${color} ${(Math.abs(percent) / 100) * 360}deg,
-        rgb(255, 255, 255) 0
+        rgb(245, 245, 245) 0
       )`,
       }}
     >

@@ -117,7 +117,7 @@ const Customers = () => {
   return (
     <div className="admin-container">
       <AdminSidebar />
-      <main>{isLoading ? <Skeleton length={15} /> : Table}</main>
+      <main className="dashboard">{isLoading ? <Skeleton length={15} /> : Table}</main>
     </div>
   );
 };
