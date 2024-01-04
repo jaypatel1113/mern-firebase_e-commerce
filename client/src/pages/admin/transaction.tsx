@@ -15,7 +15,7 @@ import { getClass, getDollarPrice, numberWithCommas } from "../../utils/features
 interface DataType {
     user: string;
     amount: string;
-    discount: number;
+    discount: string;
     quantity: number;
     status: ReactElement;
     action: ReactElement;
@@ -66,7 +66,7 @@ const Transaction = () => {
                 data.orders.map((i) => ({
                     user: i.user.name,
                     amount: `₹${numberWithCommas(i.total)}~$${getDollarPrice(i.total)}`,
-                    discount: i.discount,
+                    discount: `$ ${getDollarPrice(i.discount)}`,
                     quantity: i.orderItems.length,
                     status: (
                         <span className={getClass(i.status)}>

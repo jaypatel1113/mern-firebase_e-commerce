@@ -22,6 +22,7 @@
 - ${\color{#EF476F}Admin \space Dashboard}$
 - ${\color{#EF476F}Visualized \space Data \space (last \space 6 \space months)}$
 - ${\color{#EF476F}CRUD \space Operation \space (Users, \space Products, \space Transaction, \space Coupons)}$
+- ${\color{#EF476F}Payment \space in \space USD \space and \space Stats \space in \space INR \space (in \space Stripe - INR)}$
 - ${\color{#EF476F}Custom \space Coupons \space (Discount)}$
 - ${\color{#FAC748}Payment \space Gateway}$
 - ${\color{#FAC748}Various \space animated \space Charts}$
