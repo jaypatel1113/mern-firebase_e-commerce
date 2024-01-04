@@ -5,6 +5,7 @@ import { useNewCouponMutation } from "../../../redux/api/paymentAPI";
 import { responseToast } from "../../../utils/features";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
+import toast from "react-hot-toast";
 
 const allLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 const allNumbers = "1234567890";
@@ -32,7 +33,7 @@ const Coupon = () => {
         e.preventDefault();
 
         if (!includeNumbers && !includeCharacters && !includeSymbols)
-            return alert("Please Select One At Least");
+            return toast.error("Please Select One At Least");
 
         let result: string = prefix || "";
         const loopLength: number = size - result.length;
