@@ -34,6 +34,7 @@ export const createPaymentIntent = TryCatch(async (req, res, next) => {
 
 export const newCoupon = TryCatch(async (req, res, next) => {
     const { coupon, amount } = req.body;
+    console.log(req.body)
 
     if (!coupon || !amount)
         return next(new ErrorHandler("Please enter both coupon and amount", 400));
@@ -71,12 +72,14 @@ export const allCoupons = TryCatch(async (req, res, next) => {
 export const deleteCoupon = TryCatch(async (req, res, next) => {
     const { id } = req.params;
 
-    const coupon = await Coupon.findByIdAndDelete(id);
+    const coupon = await Coupon.findOne({ _id: id });
 
     if (!coupon) return next(new ErrorHandler("Invalid Coupon ID", 400));
 
+    await coupon.deleteOne();
+
     return res.status(200).json({
         success: true,
-        message: `Coupon ${coupon.value} Deleted Successfully`,
+        message: `Coupon ${coupon.code} Deleted Successfully`,
     });
 });

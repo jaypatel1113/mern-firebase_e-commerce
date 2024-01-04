@@ -1,5 +1,9 @@
-import { FormEvent, useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import AdminSidebar from "../../../components/admin/AdminSidebar";
+import { useNewCouponMutation } from "../../../redux/api/paymentAPI";
+import { responseToast } from "../../../utils/features";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 
 const allLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 const allNumbers = "1234567890";
@@ -15,12 +19,17 @@ const Coupon = () => {
 
   const [coupon, setCoupon] = useState<string>("");
 
+
+  const { user } = useSelector((state: RootState) => state.userReducer);
+  const [newCoupon] = useNewCouponMutation();
+
+
   const copyText = async (coupon: string) => {
     await window.navigator.clipboard.writeText(coupon);
     setIsCopied(true);
   };
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (!includeNumbers && !includeCharacters && !includeSymbols)
@@ -42,6 +51,19 @@ const Coupon = () => {
     setCoupon(result);
   };
 
+  const handleSaveClick = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+  
+    const formData = {
+        coupon,
+        amount: +(Math.random() * 100000).toFixed(2)
+    }
+  
+    const res = await newCoupon({ formData, userId: user?._id! });
+    responseToast(res, null, "");
+  };
+  
+
   useEffect(() => {
     setIsCopied(false);
   }, [coupon]);
@@ -52,7 +74,7 @@ const Coupon = () => {
       <main className="dashboard-app-container">
         <h1>Coupon</h1>
         <section>
-          <form className="coupon-form" onSubmit={submitHandler}>
+          <form className="coupon-form">
             <input
               type="text"
               placeholder="Text to include"
@@ -94,15 +116,22 @@ const Coupon = () => {
               />
               <span>Symbols</span>
             </fieldset>
-            <button type="submit">Generate</button>
+
+            <div className="btn-container">
+                <button onClick={submitHandler}>Generate</button>
+                {
+                    coupon && <button onClick={handleSaveClick}>Save</button>
+                }
+            </div>
+
           </form>
 
           {coupon && (
-            <code>
-              {coupon}{" "}
+            <code style={{padding: "4px 8px"}}>
+              {coupon}
               <span onClick={() => copyText(coupon)}>
                 {isCopied ? "Copied" : "Copy"}
-              </span>{" "}
+              </span>
             </code>
           )}
         </section>

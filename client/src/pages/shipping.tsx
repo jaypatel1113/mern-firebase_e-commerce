@@ -1,16 +1,17 @@
-import axios from "axios";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { BiArrowBack } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { saveShippingInfo } from "../redux/reducer/cartReducer";
-import { RootState, server } from "../redux/store";
+import { RootState } from "../redux/store";
 import { getDollarPrice } from "../utils/features";
+import { useCreateMutation } from "../redux/api/paymentAPI";
 
 const Shipping = () => {
     const { cartItems, total } = useSelector((state: RootState) => state.cartReducer);
     const { user } = useSelector((state: RootState) => state.userReducer);
+    const [createPayment] = useCreateMutation();
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -29,28 +30,22 @@ const Shipping = () => {
         e.preventDefault();
 
         dispatch(saveShippingInfo(shippingInfo));
+        const data = {
+            amount: +getDollarPrice(total),
+            name: user?.name!,
+            shippingInfo: shippingInfo,
+        }
 
-        try {
-            const { data } = await axios.post(
-                `${server}/api/v1/payment/create`,
-                {
-                    amount: getDollarPrice(total),
-                    name: user?.name,
-                    shippingInfo: shippingInfo,
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
+        const res = await createPayment(data);
+        if ("data" in res) {
+            const clientSecret = res.data.clientSecret;
 
             navigate("/pay", {
-                state: data.clientSecret,
+                state: clientSecret,
             });
-        } catch (error) {
-            console.log(error);
+        } else {
             toast.error("Something went wrong");
+            console.error("Error in createPayment:", res.error);
         }
     };
 

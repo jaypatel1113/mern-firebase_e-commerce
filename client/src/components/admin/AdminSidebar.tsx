@@ -104,6 +104,12 @@ const DivOne = ({ location }: { location: Location }) => (
         Icon={AiFillFileText}
         location={location}
       />
+      <Li
+        url="/admin/coupons"
+        text="Coupons"
+        Icon={AiFillFileText}
+        location={location}
+      />
     </ul>
   </div>
 );
